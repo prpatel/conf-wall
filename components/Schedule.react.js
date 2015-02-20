@@ -18,13 +18,13 @@ module.exports = Schedule = React.createClass({
   },
   componentDidMount: function () {
     this.scheduleParser();
-    console.log('Schedule componentDidMount');
+
     setInterval(this.scheduleParser, 300000);
   },
 
   scheduleParser: function () {
 
-
+    console.log('Schedule scheduleParser');
     $.ajax({
       url: "https://devnexus.com/s/schedule.json",
       dataType: 'jsonp',

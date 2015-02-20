@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab379570-d86a-4e91-8d52-9bc131a1097c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/Schedule.react.js" afterPath="$PROJECT_DIR$/components/Schedule.react.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/bundle.js" afterPath="$PROJECT_DIR$/public/js/bundle.js" />
     </list>
     <ignored path="react-tweets.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,8 +60,8 @@
       <file leaf-file-name="Schedule.react.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/Schedule.react.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52154195" vertical-offset="0" max-vertical-offset="3680">
-              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.67800456" vertical-offset="0" max-vertical-offset="3680">
+              <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -580,8 +581,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Schedule.react.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52154195" vertical-offset="0" max-vertical-offset="3680">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.67800456" vertical-offset="0" max-vertical-offset="3680">
+          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
           <folding />
         </state>
       </provider>

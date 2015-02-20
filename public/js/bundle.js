@@ -76,7 +76,7 @@ module.exports = Schedule = React.createClass({displayName: 'Schedule',
     return {schedule: []};
   },
   componentDidMount: function () {
-    //this.scheduleParser();
+    this.scheduleParser();
     console.log('Schedule componentDidMount');
     setInterval(this.scheduleParser, 300000);
   },
