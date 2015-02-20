@@ -3,24 +3,35 @@
 var React = require('react');
 var Tweets = require('./Tweets.react.js');
 var Loader = require('./Loader.react.js');
-var NotificationBar = require('./NotificationBar.react.js');
+var AnnounceBar = require('./AnnounceBar.react.js');
 var Panel = require('react-bootstrap').Panel;
 var Jumbotron = require('react-bootstrap').Jumbotron;
 var Button = require('react-bootstrap').Button;
 var Grid = require('react-bootstrap').Grid;
 var Col = require('react-bootstrap').Col;
 var Row = require('react-bootstrap').Row;
+var Well = require('react-bootstrap').Well;
 // Export the TweetsApp component
 module.exports = TweetsApp = React.createClass({
 
   tweetData: {
     updated: 0,
     count: 0,
-    skip: 0
+    skip: 0,
+    newTweetsAvail: false,
+    announcement: "Include @devnexus in your Tweets to enter prize drawings!"
   },
 
   displayNewTweets: function() {
-    this.setState({tweets: this.tweetData.updated, count: this.tweetData.count, skip: this.tweetData.skip});
+    if (this.tweetData.newTweetsAvail) {
+      this.tweetData.newTweetsAvail = false;
+      this.setState({tweets: this.tweetData.updated,
+        count: this.tweetData.count,
+        skip: this.tweetData.skip,
+        announcement: this.tweetData.announcement});
+
+    }
+
   },
 
   // Method to add a tweet to our timeline
@@ -39,6 +50,7 @@ module.exports = TweetsApp = React.createClass({
     this.tweetData.updated = updated;
     this.tweetData.count = count;
     this.tweetData.skip = skip;
+    this.tweetData.newTweetsAvail = true;
   },
 
   // Method to get JSON from server by page
@@ -109,6 +121,7 @@ module.exports = TweetsApp = React.createClass({
 
     props = props || this.props;
 
+    this.tweetData.updated = props.tweets;
     // Set initial application state using props
     return {
       tweets: props.tweets,
@@ -116,7 +129,8 @@ module.exports = TweetsApp = React.createClass({
       page: 0,
       paging: false,
       skip: 0,
-      done: false
+      done: false,
+      announcement: "Include @devnexus in your Tweets to enter prize drawings!"
     };
 
   },
@@ -142,6 +156,13 @@ module.exports = TweetsApp = React.createClass({
 
     });
 
+    socket.on('announce', function (data) {
+    console.log('recieved new announcment:', data);
+      self.tweetData.announcement = data;
+     self.tweetData.newTweetsAvail = true;
+      self.displayNewTweets();
+    });
+
     setInterval(this.displayNewTweets, 2000);
 
     // Attach scroll event to the window for infinity paging
@@ -151,33 +172,31 @@ module.exports = TweetsApp = React.createClass({
 
   // Render the component
   render: function(){
-
+  console.log('this.state.announcement', this.state.announcement)
     return (
 
 <Grid>
-  <Row className="show-grid">
-    <Col xs={12} >
-      <Panel >
-        <img src="DevNexus_logo_large.png" className="center-block"></img>
+  <Row className="show-grid" >
+    <Col xs={12} className = "small-padding-panel">
+      <Panel className = "small-padding-panel">
+        <img src="DevNexus_logo_large.png" className="center-block main-logo"></img>
       </Panel>
     </Col>
   </Row>
 
   <Row className="show-grid">
-    <Col xs={12} >
-      <Panel className="text-center">
-        <span className = "announce-font">Include @devnexus in your Tweets to enter prize drawings!</span>
-      </Panel>
+    <Col xs={12} className = "small-padding-panel">
+      <AnnounceBar announcement={this.state.announcement}/>
     </Col>
   </Row>
 
     <Row className="show-grid">
-      <Col xs={6}>
+      <Col xs={4} className = "small-padding-panel">
         <Panel>
           Basic panel example
         </Panel>
       </Col>
-      <Col xs={6}>
+      <Col xs={8} className = "small-padding-panel">
       <Panel className="tweet-section">
         <Tweets tweets={this.state.tweets} />
       </Panel>

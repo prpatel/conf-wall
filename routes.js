@@ -1,6 +1,8 @@
 var JSX = require('node-jsx').install(),
   React = require('react'),
   TweetsApp = require('./components/TweetsApp.react'),
+  AnnounceForm = require('./components/AnnounceForm.react'),
+
   Tweet = require('./models/Tweet');
 
 module.exports = {
@@ -34,6 +36,40 @@ module.exports = {
       res.send(tweets);
 
     });
+  },
+
+  announcement: function(req, res) {
+    // Render React to a string, passing in our fetched tweets
+    var MyComponent = React.createFactory(AnnounceForm);
+    var markup = React.renderToString(
+      MyComponent()
+    );
+
+    // Render our 'home' template
+    res.render('home', {
+      markup: markup
+    });
+  },
+
+  sendAnnouncement: function(io) {
+    return function (req, res) {
+      var announcement = req.body.announcement;
+
+      // Render React to a string, passing in our fetched tweets
+      var MyComponent = React.createFactory(AnnounceForm);
+      var markup = React.renderToString(
+        MyComponent({announcement: announcement})
+      );
+
+      // Render our 'home' template
+      res.render('home', {
+        markup: markup
+      });
+      console.log('sending announcement:' + announcement);
+      io.emit('announce', {
+        announcement: announcement
+      });
+    }
   }
 
 }

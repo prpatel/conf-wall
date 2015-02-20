@@ -12,7 +12,37 @@ React.renderComponent(
   TweetsApp({tweets: initialState}),
   document.getElementById('react-app')
 );
-},{"./components/TweetsApp.react":"/Users/prpatel/dev/react/react-tweets/components/TweetsApp.react.js","react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js"}],"/Users/prpatel/dev/react/react-tweets/components/Loader.react.js":[function(require,module,exports){
+},{"./components/TweetsApp.react":"/Users/prpatel/dev/react/react-tweets/components/TweetsApp.react.js","react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js"}],"/Users/prpatel/dev/react/react-tweets/components/AnnounceBar.react.js":[function(require,module,exports){
+/** @jsx React.DOM */
+
+var React = require('react');
+var Panel = require('react-bootstrap').Panel;
+
+module.exports = AnnounceBar = React.createClass({displayName: 'AnnounceBar',
+
+  // Called directly after component rendering, only on client
+  componentDidMount: function(){
+
+    //socket.on('announce', function (data) {
+    //  this.setState({announcement: data});
+    //});
+
+  },
+
+  render: function(){
+    var announcement = this.props.announcement;
+
+    return (
+
+    Panel({bsSize: "small", className: "text-center small-padding-panel"}, 
+      React.DOM.span({className: "announce-font small-padding-panel"}, announcement)
+    )
+
+    )
+  }
+});
+
+},{"react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js","react-bootstrap":"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/main.js"}],"/Users/prpatel/dev/react/react-tweets/components/Loader.react.js":[function(require,module,exports){
 /** @jsx React.DOM */
 
 var React = require('react');
@@ -22,21 +52,6 @@ module.exports = Loader = React.createClass({displayName: 'Loader',
     return (
       React.DOM.div({className: "loader " + (this.props.paging ? "active" : "")}, 
         React.DOM.img({src: "svg/loader.svg"})
-      )
-    )
-  }
-});
-},{"react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js"}],"/Users/prpatel/dev/react/react-tweets/components/NotificationBar.react.js":[function(require,module,exports){
-/** @jsx React.DOM */
-
-var React = require('react');
-
-module.exports = NotificationBar = React.createClass({displayName: 'NotificationBar',
-  render: function(){
-    var count = this.props.count;
-    return (
-      React.DOM.div({className: "notification-bar" + (count > 0 ? ' active' : '')}, 
-        React.DOM.p(null, "There are ", count, " new tweets! ", React.DOM.a({href: "#top", onClick: this.props.onShowNewTweets}, "Click here to see them."))
       )
     )
   }
@@ -51,7 +66,8 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Panel = require('react-bootstrap').Panel;
 var Col = require('react-bootstrap').Col;
-
+var Label = require('react-bootstrap').Label;
+var Well = require('react-bootstrap').Well;
 
 var counter = 0;
 
@@ -65,6 +81,8 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
     } else {
       bgColor = "info"
     }
+
+    //bgColor = ""
     counter++;
     return (
       ListGroupItem({bsStyle: bgColor}, 
@@ -72,15 +90,17 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
 
         Grid(null, 
             Row({className: "show-grid"}, 
-              Col({md: 1}, 
+              Col({sm: 1}, 
                   React.DOM.img({src: tweet.avatar, className: "avatar"})
               ), 
-              Col({md: 3}, 
+              Col({sm: 6, className: "tweet-text"}, 
                 Row(null, 
                   "@", tweet.screenname
+
                 ), 
                 Row(null, 
                   tweet.body
+
                 )
               )
             )
@@ -141,24 +161,35 @@ module.exports = Tweets = React.createClass({displayName: 'Tweets',
 var React = require('react');
 var Tweets = require('./Tweets.react.js');
 var Loader = require('./Loader.react.js');
-var NotificationBar = require('./NotificationBar.react.js');
+var AnnounceBar = require('./AnnounceBar.react.js');
 var Panel = require('react-bootstrap').Panel;
 var Jumbotron = require('react-bootstrap').Jumbotron;
 var Button = require('react-bootstrap').Button;
 var Grid = require('react-bootstrap').Grid;
 var Col = require('react-bootstrap').Col;
 var Row = require('react-bootstrap').Row;
+var Well = require('react-bootstrap').Well;
 // Export the TweetsApp component
 module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
   tweetData: {
     updated: 0,
     count: 0,
-    skip: 0
+    skip: 0,
+    newTweetsAvail: false,
+    announcement: "Include @devnexus in your Tweets to enter prize drawings!"
   },
 
   displayNewTweets: function() {
-    this.setState({tweets: this.tweetData.updated, count: this.tweetData.count, skip: this.tweetData.skip});
+    if (this.tweetData.newTweetsAvail) {
+      this.tweetData.newTweetsAvail = false;
+      this.setState({tweets: this.tweetData.updated,
+        count: this.tweetData.count,
+        skip: this.tweetData.skip,
+        announcement: this.tweetData.announcement});
+
+    }
+
   },
 
   // Method to add a tweet to our timeline
@@ -177,6 +208,7 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
     this.tweetData.updated = updated;
     this.tweetData.count = count;
     this.tweetData.skip = skip;
+    this.tweetData.newTweetsAvail = true;
   },
 
   // Method to get JSON from server by page
@@ -247,6 +279,7 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
     props = props || this.props;
 
+    this.tweetData.updated = props.tweets;
     // Set initial application state using props
     return {
       tweets: props.tweets,
@@ -254,7 +287,8 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
       page: 0,
       paging: false,
       skip: 0,
-      done: false
+      done: false,
+      announcement: "Include @devnexus in your Tweets to enter prize drawings!"
     };
 
   },
@@ -280,6 +314,13 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
     });
 
+    socket.on('announce', function (data) {
+    console.log('recieved new announcment:', data);
+      self.tweetData.announcement = data;
+     self.tweetData.newTweetsAvail = true;
+      self.displayNewTweets();
+    });
+
     setInterval(this.displayNewTweets, 2000);
 
     // Attach scroll event to the window for infinity paging
@@ -289,33 +330,31 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
   // Render the component
   render: function(){
-
+  console.log('this.state.announcement', this.state.announcement)
     return (
 
 Grid(null, 
   Row({className: "show-grid"}, 
-    Col({xs: 12}, 
-      Panel(null, 
-        React.DOM.img({src: "DevNexus_logo_large.png", className: "center-block"})
+    Col({xs: 12, className: "small-padding-panel"}, 
+      Panel({className: "small-padding-panel"}, 
+        React.DOM.img({src: "DevNexus_logo_large.png", className: "center-block main-logo"})
       )
     )
   ), 
 
   Row({className: "show-grid"}, 
-    Col({xs: 12}, 
-      Panel({className: "text-center"}, 
-        React.DOM.span({className: "announce-font"}, "Include @devnexus in your Tweets to enter prize drawings!")
-      )
+    Col({xs: 12, className: "small-padding-panel"}, 
+      AnnounceBar({announcement: this.state.announcement})
     )
   ), 
 
     Row({className: "show-grid"}, 
-      Col({xs: 6}, 
+      Col({xs: 4, className: "small-padding-panel"}, 
         Panel(null, 
           "Basic panel example"
         )
       ), 
-      Col({xs: 6}, 
+      Col({xs: 8, className: "small-padding-panel"}, 
       Panel({className: "tweet-section"}, 
         Tweets({tweets: this.state.tweets})
       )
@@ -329,7 +368,7 @@ Grid(null,
 
 });
 
-},{"./Loader.react.js":"/Users/prpatel/dev/react/react-tweets/components/Loader.react.js","./NotificationBar.react.js":"/Users/prpatel/dev/react/react-tweets/components/NotificationBar.react.js","./Tweets.react.js":"/Users/prpatel/dev/react/react-tweets/components/Tweets.react.js","react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js","react-bootstrap":"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/main.js"}],"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/Accordion.js":[function(require,module,exports){
+},{"./AnnounceBar.react.js":"/Users/prpatel/dev/react/react-tweets/components/AnnounceBar.react.js","./Loader.react.js":"/Users/prpatel/dev/react/react-tweets/components/Loader.react.js","./Tweets.react.js":"/Users/prpatel/dev/react/react-tweets/components/Tweets.react.js","react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js","react-bootstrap":"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/main.js"}],"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/Accordion.js":[function(require,module,exports){
 var React = require('react');
 var PanelGroup = require('./PanelGroup');
 

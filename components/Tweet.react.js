@@ -7,7 +7,8 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Panel = require('react-bootstrap').Panel;
 var Col = require('react-bootstrap').Col;
-
+var Label = require('react-bootstrap').Label;
+var Well = require('react-bootstrap').Well;
 
 var counter = 0;
 
@@ -21,6 +22,8 @@ module.exports = Tweet = React.createClass({
     } else {
       bgColor = "info"
     }
+
+    //bgColor = ""
     counter++;
     return (
       <ListGroupItem bsStyle={bgColor}>
@@ -28,15 +31,17 @@ module.exports = Tweet = React.createClass({
 
         <Grid>
             <Row className="show-grid">
-              <Col md={1}>
+              <Col sm={1}>
                   <img src={tweet.avatar} className="avatar"/>
               </Col>
-              <Col md={3}>
-                <Row>
+              <Col sm={6} className = "tweet-text">
+                <Row >
                   @{tweet.screenname}
+
                 </Row>
                 <Row>
                   {tweet.body}
+
                 </Row>
               </Col>
             </Row>
