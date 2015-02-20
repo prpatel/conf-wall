@@ -18,15 +18,15 @@ module.exports = Tweet = React.createClass({
     var tweet = this.props.tweet;
     var bgColor;
     if (counter % 2) {
-      bgColor = "success"
+      bgColor = "bgColorGreen"
     } else {
-      bgColor = "info"
+      bgColor = "bgColorOrange"
     }
 
     //bgColor = ""
     counter++;
     return (
-      <ListGroupItem bsStyle={bgColor}>
+      <ListGroupItem className={bgColor}>
 
 
         <Grid>

@@ -4,6 +4,7 @@ var React = require('react');
 var Tweets = require('./Tweets.react.js');
 var Loader = require('./Loader.react.js');
 var AnnounceBar = require('./AnnounceBar.react.js');
+var Schedule = require('./Schedule.react.js');
 var Panel = require('react-bootstrap').Panel;
 var Jumbotron = require('react-bootstrap').Jumbotron;
 var Button = require('react-bootstrap').Button;
@@ -157,7 +158,6 @@ module.exports = TweetsApp = React.createClass({
     });
 
     socket.on('announce', function (data) {
-    console.log('recieved new announcment:', data);
       self.tweetData.announcement = data;
      self.tweetData.newTweetsAvail = true;
       self.displayNewTweets();
@@ -172,7 +172,6 @@ module.exports = TweetsApp = React.createClass({
 
   // Render the component
   render: function(){
-  console.log('this.state.announcement', this.state.announcement)
     return (
 
 <Grid>
@@ -193,7 +192,7 @@ module.exports = TweetsApp = React.createClass({
     <Row className="show-grid">
       <Col xs={4} className = "small-padding-panel">
         <Panel>
-          Basic panel example
+          <Schedule/>
         </Panel>
       </Col>
       <Col xs={8} className = "small-padding-panel">

@@ -193,3 +193,23 @@
   padding: 0 !important;
   margin: 0 !important;
 }
+
+.schedule-text {
+  font-size: 12px;
+}
+
+.schedule-room {
+  color: #5A8D26;
+}
+
+.time {
+  color: #F17E29;
+}
+
+.bgColorGreen {
+  background-color: #5A8D26;
+}
+
+.bgColorOrange {
+  background-color: #EB6B21;
+}
