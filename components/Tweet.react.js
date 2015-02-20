@@ -35,7 +35,7 @@ module.exports = Tweet = React.createClass({
                   <img src={tweet.avatar} className="avatar"/>
               </Col>
               <Col sm={6} className = "tweet-text">
-                <Row >
+                <Row className = "orange-color">
                   @{tweet.screenname}
 
                 </Row>

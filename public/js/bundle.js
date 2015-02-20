@@ -161,6 +161,7 @@ module.exports = Schedule = React.createClass({displayName: 'Schedule',
       }
 
       var scheduleData = getScheduleForNextTimeSlot(moment('March 11, 2015 2:45 PM'));
+      //var scheduleData = getScheduleForNextTimeSlot(moment());
       componentContext.setState({schedule: scheduleData});
 
     };
@@ -187,7 +188,7 @@ module.exports = Schedule = React.createClass({displayName: 'Schedule',
     return (
       ListGroup(null, 
 
-        ListGroupItem({className: "schedule-text small-padding-panel text-center"}, 
+        ListGroupItem({className: "schedule-text small-padding-panel text-center orange-color"}, 
         React.DOM.span({className: "time "}, "Up next on ", timeSlotString)
         ), 
 
@@ -318,7 +319,7 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
                   React.DOM.img({src: tweet.avatar, className: "avatar"})
               ), 
               Col({sm: 6, className: "tweet-text"}, 
-                Row(null, 
+                Row({className: "orange-color"}, 
                   "@", tweet.screenname
 
                 ), 

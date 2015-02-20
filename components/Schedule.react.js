@@ -102,6 +102,7 @@ module.exports = Schedule = React.createClass({
       }
 
       var scheduleData = getScheduleForNextTimeSlot(moment('March 11, 2015 2:45 PM'));
+      //var scheduleData = getScheduleForNextTimeSlot(moment());
       componentContext.setState({schedule: scheduleData});
 
     };
@@ -128,7 +129,7 @@ module.exports = Schedule = React.createClass({
     return (
       <ListGroup>
 
-        <ListGroupItem className="schedule-text small-padding-panel text-center">
+        <ListGroupItem className="schedule-text small-padding-panel text-center orange-color">
         <span className="time ">Up next on {timeSlotString}</span>
         </ListGroupItem>
 

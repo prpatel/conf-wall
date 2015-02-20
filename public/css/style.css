@@ -117,23 +117,22 @@
 
 .tweet-text
 {
-    font-size: 13px;
+    font-size: 14px;
     /*display: block;*/
     /*float: left;*/
     left: 0px;
     /*right: 200px;*/
     /*width: 1000px;*/
-    height: 70px;
+    height: 65px;
     margin: 0px;
     bottom: 0px;
     padding: 0px;
 }
 
 .tweet-section {
-  max-height: 10;
-  min-height: 10;
-  height: 450px;
-  overflow-y: scroll;
+  height: 460px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 @media (max-width: 650px)
@@ -202,7 +201,7 @@
   color: #5A8D26;
 }
 
-.time {
+.orange-color {
   color: #F17E29;
 }
 
