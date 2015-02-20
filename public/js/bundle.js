@@ -77,13 +77,13 @@ module.exports = Schedule = React.createClass({displayName: 'Schedule',
   },
   componentDidMount: function () {
     this.scheduleParser();
-    console.log('Schedule componentDidMount');
+
     setInterval(this.scheduleParser, 300000);
   },
 
   scheduleParser: function () {
 
-
+    console.log('Schedule scheduleParser');
     $.ajax({
       url: "https://devnexus.com/s/schedule.json",
       dataType: 'jsonp',
@@ -571,9 +571,9 @@ Grid(null,
     )
   ), 
 
-    Row({className: "show-grid"}, 
+    Row({className: "show-grid "}, 
       Col({xs: 4, className: "small-padding-panel"}, 
-        Panel(null, 
+        Panel({className: "tweet-section "}, 
           Schedule(null)
         )
       ), 
