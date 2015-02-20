@@ -29,7 +29,15 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.disable('etag');
 
 // Connect to our mongo database
-mongoose.connect('mongodb://localhost/react-tweets');
+//mongoose.connect('mongodb://localhost/react-tweets');
+
+
+var uristring =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/react-tweets';
+// Connect to our mongo database
+mongoose.connect(uristring);
 
 // Create a new ntwitter instance
 var twit = new twitter(config.twitter);
