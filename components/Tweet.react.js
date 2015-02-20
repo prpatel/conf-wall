@@ -24,6 +24,8 @@ module.exports = Tweet = React.createClass({
     }
 
     //bgColor = ""
+    var imgUrl = tweet.avatar;
+    imgUrl = imgUrl.replace(/normal/, "bigger");
     counter++;
     return (
       <ListGroupItem className={bgColor}>
@@ -32,7 +34,7 @@ module.exports = Tweet = React.createClass({
         <Grid>
             <Row className="show-grid">
               <Col sm={1}>
-                  <img src={tweet.avatar} className="avatar"/>
+                  <img src={imgUrl} className="avatar"/>
               </Col>
               <Col sm={6} className = "tweet-text">
                 <Row className = "orange-color">

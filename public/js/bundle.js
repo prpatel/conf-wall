@@ -308,6 +308,8 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
     }
 
     //bgColor = ""
+    var imgUrl = tweet.avatar;
+    imgUrl = imgUrl.replace(/normal/, "bigger");
     counter++;
     return (
       ListGroupItem({className: bgColor}, 
@@ -316,7 +318,7 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
         Grid(null, 
             Row({className: "show-grid"}, 
               Col({sm: 1}, 
-                  React.DOM.img({src: tweet.avatar, className: "avatar"})
+                  React.DOM.img({src: imgUrl, className: "avatar"})
               ), 
               Col({sm: 6, className: "tweet-text"}, 
                 Row({className: "orange-color"}, 
