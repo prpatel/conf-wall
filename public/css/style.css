@@ -1,9 +1,8 @@
 *
 {
     box-sizing: border-box;
+  font-family: 'Rokkitt', serif;
 }
-
-
 
 .loader
 {
@@ -194,7 +193,7 @@
 }
 
 .schedule-text {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .schedule-room {

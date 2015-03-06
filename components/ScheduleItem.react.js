@@ -28,10 +28,6 @@ module.exports = ScheduleItem = React.createClass({
     } else {
       var speakerPhoto = "https://pbs.twimg.com/profile_images/535917019174936576/pr4jJjbX_400x400.png";
     }
-
-
-
-
     //bgColor = ""
     counter++;
     return (
@@ -45,22 +41,3 @@ module.exports = ScheduleItem = React.createClass({
     )
   }
 });
-
-/*
- <Grid>
- <Row className="show-grid">
- <Col sm={1}>
- <img src={speakerPhoto} className="avatar"/>
- </Col>
- <Col sm={6} className = "tweet-text">
- <Row >
- <strong>{item.title}</strong>
- </Row>
- <Row>
- {item.room}
-
- </Row>
- </Col>
- </Row>
- </Grid>
- */

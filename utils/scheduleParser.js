@@ -42,7 +42,7 @@ _.each(alldays.scheduleItemList.scheduleItems, function(it) {
       description : it.title
     });
 
-  } else if (it.scheduleItemType == 'BREAK') {
+  } else if (it.scheduleItemType == 'BREAK' || it.scheduleItemType == 'REGISTRATION') {
     // don't show breaks
     days.splice(unixTime, 1);
   } else {
@@ -78,6 +78,6 @@ function getScheduleForNextTimeSlot(currentTime) {
   }
 }
 
-console.log(getScheduleForNextTimeSlot(moment('March 11, 2015 6:00 PM')));
+console.log(getScheduleForNextTimeSlot(moment('March 11, 2015 2:00 PM')));
 
 // image = "https://devnexus.com/s/speakers/"+talkDetails.speakerId+".jpg";

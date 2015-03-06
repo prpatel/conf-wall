@@ -189,7 +189,7 @@ module.exports = TweetsApp = React.createClass({
     </Col>
   </Row>
 
-    <Row className="show-grid ">
+    <Row className="show-grid " >
       <Col xs={4} className ="small-padding-panel">
         <Panel className="tweet-section ">
           <Schedule/>

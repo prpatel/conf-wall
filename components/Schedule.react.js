@@ -65,8 +65,9 @@ module.exports = Schedule = React.createClass({
             description: it.title
           });
 
-        } else if (it.scheduleItemType == 'BREAK') {
+        } else if (it.scheduleItemType == 'BREAK' || it.scheduleItemType == 'REGISTRATION') {
           // don't show breaks
+          console.log('it.scheduleItemType', it.scheduleItemType)
           days.splice(unixTime, 1);
         } else {
           var speakerInfo = _.reduce(it.presentation.speakers, function (memo, s) {

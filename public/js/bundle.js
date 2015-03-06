@@ -124,8 +124,9 @@ module.exports = Schedule = React.createClass({displayName: 'Schedule',
             description: it.title
           });
 
-        } else if (it.scheduleItemType == 'BREAK') {
+        } else if (it.scheduleItemType == 'BREAK' || it.scheduleItemType == 'REGISTRATION') {
           // don't show breaks
+          console.log('it.scheduleItemType', it.scheduleItemType)
           days.splice(unixTime, 1);
         } else {
           var speakerInfo = _.reduce(it.presentation.speakers, function (memo, s) {
@@ -244,10 +245,6 @@ module.exports = ScheduleItem = React.createClass({displayName: 'ScheduleItem',
     } else {
       var speakerPhoto = "https://pbs.twimg.com/profile_images/535917019174936576/pr4jJjbX_400x400.png";
     }
-
-
-
-
     //bgColor = ""
     counter++;
     return (
@@ -261,25 +258,6 @@ module.exports = ScheduleItem = React.createClass({displayName: 'ScheduleItem',
     )
   }
 });
-
-/*
- <Grid>
- <Row className="show-grid">
- <Col sm={1}>
- <img src={speakerPhoto} className="avatar"/>
- </Col>
- <Col sm={6} className = "tweet-text">
- <Row >
- <strong>{item.title}</strong>
- </Row>
- <Row>
- {item.room}
-
- </Row>
- </Col>
- </Row>
- </Grid>
- */
 
 },{"react":"/Users/prpatel/dev/react/react-tweets/node_modules/react/react.js","react-bootstrap":"/Users/prpatel/dev/react/react-tweets/node_modules/react-bootstrap/lib/main.js"}],"/Users/prpatel/dev/react/react-tweets/components/Tweet.react.js":[function(require,module,exports){
 /** @jsx React.DOM */
