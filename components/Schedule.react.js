@@ -102,8 +102,8 @@ module.exports = Schedule = React.createClass({
         }
       }
 
-      var scheduleData = getScheduleForNextTimeSlot(moment('March 11, 2015 2:45 PM'));
-      //var scheduleData = getScheduleForNextTimeSlot(moment());
+      // var scheduleData = getScheduleForNextTimeSlot(moment('March 11, 2015 2:45 PM'));
+      var scheduleData = getScheduleForNextTimeSlot(moment());
       componentContext.setState({schedule: scheduleData});
 
     };
@@ -153,4 +153,3 @@ module.exports = Schedule = React.createClass({
 
 
  */
-
