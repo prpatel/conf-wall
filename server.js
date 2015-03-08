@@ -63,7 +63,7 @@ var server = http.createServer(app).listen(port, function() {
 io = require('socket.io').listen(server);
 app.post('/announcement', routes.sendAnnouncement(io));
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'javascript'}, function(stream){
+twit.stream('statuses/filter',{ track: '@devnexus,#devnexus'}, function(stream){
   streamHandler(stream,io);
 });
 
