@@ -1,7 +1,20 @@
 *
 {
     box-sizing: border-box;
-  font-family: 'Rokkitt', serif;
+  font-family: 'Oxygen', serif;
+}
+
+body {
+   background: url(../connect-large-bg.png);
+    background-repeat: no-repeat;
+    background-blend-mode: color-dodge;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .loader
@@ -182,9 +195,13 @@
 .example-leave.example-leave-active {
   opacity: 0.01;
 }
+.main-logo-background {
+  background-image: url(/connect_js_background.png);
+}
 
 .main-logo {
-  width: 60%
+  width: 50%;
+
 }
 
 .small-padding-panel {

@@ -20,7 +20,7 @@ module.exports = TweetsApp = React.createClass({
     count: 0,
     skip: 0,
     newTweetsAvail: false,
-    announcement: "Include @devnexus in your Tweets to enter prize drawings!"
+    announcement: "Include @connect_js in your Tweets to see them on the big screen :)"
   },
 
   displayNewTweets: function() {
@@ -131,7 +131,7 @@ module.exports = TweetsApp = React.createClass({
       paging: false,
       skip: 0,
       done: false,
-      announcement: "Include @devnexus in your Tweets to enter prize drawings!"
+      announcement: "Include @connect_js in your Tweets!"
     };
 
   },
@@ -174,35 +174,19 @@ module.exports = TweetsApp = React.createClass({
   render: function(){
     return (
 
-<Grid>
-  <Row className="show-grid" >
-    <Col xs={12} className = "small-padding-panel">
-      <Panel className = "small-padding-panel">
-        <img src="DevNexus_logo_large.png" className="center-block main-logo"></img>
-      </Panel>
-    </Col>
-  </Row>
 
-  <Row className="show-grid">
-    <Col xs={12} className = "small-padding-panel">
+      <div>
       <AnnounceBar announcement={this.state.announcement}/>
-    </Col>
-  </Row>
 
-    <Row className="show-grid " >
-      <Col xs={4} className ="small-padding-panel">
-        <Panel className="tweet-section ">
-          <Schedule/>
-        </Panel>
-      </Col>
-      <Col xs={8} className = "small-padding-panel">
-      <Panel className="tweet-section">
-        <Tweets tweets={this.state.tweets} />
-      </Panel>
-      </Col>
-    </Row>
-</Grid>
 
+      
+      <Tweets tweets={this.state.tweets} />
+
+
+
+
+
+</div>
     )
 
   }

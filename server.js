@@ -63,11 +63,11 @@ var server = http.createServer(app).listen(port, function() {
 io = require('socket.io').listen(server);
 app.post('/announcement', routes.sendAnnouncement(io));
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'devnexus'}, function(stream){
+twit.stream('statuses/filter',{ track: 'connect_js,connectjs'}, function(stream){
   streamHandler(stream,io);
 });
 
-//setInterval(function() {
+// setInterval(function() {
 //  var value = random.integer(1, 100000000000);
 //
 //    io.emit('tweet',  {
@@ -79,6 +79,4 @@ twit.stream('statuses/filter',{ track: 'devnexus'}, function(stream){
 //      date: new Date(),
 //      screenname: 'test user'
 //    });
-//
-//
-//}, 1000)
+// }, 1000)

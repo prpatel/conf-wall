@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react/addons')
+var React = require('react/addons');
 var Tweet = require('./Tweet.react.js');
 var ListGroup = require('react-bootstrap').ListGroup;
 var ReactTransitionGroup = React.addons.CSSTransitionGroup;
@@ -19,14 +19,14 @@ module.exports = Schedule = React.createClass({
   componentDidMount: function () {
     this.scheduleParser();
 
-    setInterval(this.scheduleParser, 300000);
+  //  setInterval(this.scheduleParser, 300000);
   },
 
   scheduleParser: function () {
 
     console.log('Schedule scheduleParser');
     $.ajax({
-      url: "https://devnexus.com/s/schedule.json",
+      url: "http://connect-js.com/scheduleWall.json",
       dataType: 'jsonp',
       success: function(data) {
         parseDataAndSetState(data, this);
@@ -38,66 +38,24 @@ module.exports = Schedule = React.createClass({
 
 
     function parseDataAndSetState(data, componentContext) {
-      console.log('getting schedule data')
+      console.log('getting schedule data');
       var alldays = data;
       var days = [];
       var currentDay = moment('2015-01-01');
       var currentDayNum = 0;
       var currentDayIndex = 0;
       var unixTime;
-      _.each(alldays.scheduleItemList.scheduleItems, function (it) {
 
-        var currentSlot = moment(it.fromTime);
-
-        if (moment(currentSlot).isSame(currentDay)) {
-          //currentDayIndex++;
-        } else {
-          currentDay = currentSlot;
-          unixTime = currentDay.format('X');
-          days[unixTime] = [];
-        }
-        if (it.scheduleItemType == 'ADMINISTRATIVE') {
-          days[unixTime].push({
-            index: currentDayIndex,
-            time: currentSlot.format("dddd, hA"),
-            room: it.room.name,
-            title: it.title,
-            description: it.title
-          });
-
-        } else if (it.scheduleItemType == 'BREAK' || it.scheduleItemType == 'REGISTRATION') {
-          // don't show breaks
-          console.log('it.scheduleItemType', it.scheduleItemType)
-          days.splice(unixTime, 1);
-        } else {
-          var speakerInfo = _.reduce(it.presentation.speakers, function (memo, s) {
-            return memo + s.firstName + ' ' + s.lastName + '\n';
-          }, '');
-          var speakerDetails = _.reduce(it.presentation.speakers, function (memo, s) {
-            return memo + s.firstName + ' ' + s.lastName + '\n' + s.bio + '\n';
-          }, '');
-          days[unixTime].push({
-            index: currentDayIndex,
-            time: currentSlot.format("dddd, hA"),
-            room: it.room.name,
-            title: it.presentation.title,
-            speaker: speakerInfo,
-            speakerId: it.presentation.speakers[0].id
-          });
-        }
-      });
-
-      function getScheduleForNextTimeSlot(currentTime) {
+      function getScheduleForNextTimeSlot(days, currentTime) {
         var tenMinsFromNow = currentTime.add(10, 'm');
         var nextSlot;
         for (var key in days) {
-          var thisSlot = moment.unix(key);
-          //console.log(key, thisSlot.format("LLL"));
+          var thisSlot = moment(key);
+          console.log(key, thisSlot.format("LLL"));
           if (thisSlot.isAfter(tenMinsFromNow)) {
             nextSlot = thisSlot;
-            console.log("The next time slot is:", nextSlot.format("LLL"))
+            console.log("The next time slot is:", nextSlot.format("LLL"));
             return days[key];
-
           }
         }
       }
@@ -105,8 +63,7 @@ module.exports = Schedule = React.createClass({
       // var scheduleData = getScheduleForNextTimeSlot(moment('March 11, 2015 2:45 PM'));
       var scheduleData = getScheduleForNextTimeSlot(moment());
       componentContext.setState({schedule: scheduleData});
-
-    };
+    }
   },
 
   // Render our tweets
@@ -119,8 +76,9 @@ module.exports = Schedule = React.createClass({
       )
     });
 
-    if (this.state.schedule[0]) {
-      var timeSlotString =   this.state.schedule[0].time
+    if (_.first(this.state.schedule)) {
+      var timeSlotString =   _.first(this.state.schedule);
+      var timeSlotString = timeSlotString.time;
     } else {
       var timeSlotString =  " ...."
     }
@@ -145,11 +103,3 @@ module.exports = Schedule = React.createClass({
   }
 
 });
-
-
-/*
-
-
-
-
- */

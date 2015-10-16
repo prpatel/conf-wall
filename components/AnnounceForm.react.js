@@ -45,7 +45,7 @@ module.exports = AnnounceForm = React.createClass({
         <p>This is send in real time, so be careful!</p>
         <form method="post">
           <Input type="text" label='Text' defaultValue={this.state.announcement} ref="announcement" name="announcement"/>
-          <Input type="submit" value="POST" />
+          <Input type="submit" value="POST" onClick="handleSubmit"/>
         </form>
 
       </Jumbotron>
